@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "FeatureMapper"
+version = "0.1.0"
+description = "Map features"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    {name = "Muhammad Sulman", email = "sulmanmu40@gmail.com"}
+]
+
+dependencies = [
+    "tqdm>=2.0.0",
+    "biopython>=1.84"]
+
+[project.scripts]
+FeatureMapper = "src.main:main"
+
+[tool.setuptools]
+packages = ["src"]
