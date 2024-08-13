@@ -184,6 +184,10 @@ def main():
         reference_records.extend(read_genbank(args.input_gbk))  # Extend the list with records from the single file
     
     query_record = SeqIO.read(args.query, "fasta")
+    if len(query_record) !=1:
+        raise ValueError("Query should contain only one sequence.")
+    else:
+        query_record_id = query_record[0].id
 
     try:
         max_score = -math.inf
@@ -203,7 +207,7 @@ def main():
 
         annotated_features = create_features(best_reference, query_record, args.organism, args.isolate, args.gene, best_alignment)
         query_record.features = annotated_features
-        query_record.id = "Query"
+        query_record.id = query_record_id
         query_record.name = "Query"
         query_record.description = f"{args.organism} partial gene, exons and introns annotated"
         query_record.annotations["molecule_type"] = "genomic DNA"
